@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e12">
+<title>Calculadora — Danilo Gomes</title>
+<!-- iOS: abre em tela cheia quando adicionada à tela de início -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Calc·fx">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{min-height:100%;}
+  body{
+    background:radial-gradient(120% 120% at 50% 0%, #12161c 0%, #0b0e12 60%, #090b0e 100%);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    display:flex;min-height:100vh;
+    padding:calc(14px + env(safe-area-inset-top)) 16px calc(14px + env(safe-area-inset-bottom));
+    -webkit-user-select:none;user-select:none;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+  }
+  .calc{width:100%;max-width:380px;margin:auto;background:#171b21;border:1px solid #262d38;border-radius:24px;
+    padding:15px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.03);}
+  .top{display:flex;align-items:center;justify-content:space-between;margin:2px 4px 12px;}
+  .brand{font-size:11px;letter-spacing:.28em;color:#5a6675;font-weight:600;
+    font-family:ui-monospace,"SF Mono","JetBrains Mono",monospace;}
+  .brand b{color:#4c9aff;}
+  .pill{font-size:11px;letter-spacing:.14em;font-weight:700;color:#9fb0c0;
+    font-family:ui-monospace,monospace;padding:5px 11px;border-radius:999px;
+    background:#0f1318;border:1px solid #2a323d;cursor:pointer;transition:.15s;}
+  .pill.deg{color:#4c9aff;border-color:#274866;}
+  .screen{position:relative;background:#0b0e12;border:1px solid #222932;border-radius:14px;
+    padding:16px 16px 14px;margin-bottom:14px;overflow:hidden;
+    background-image:linear-gradient(90deg,rgba(76,154,255,.05) 1px,transparent 1px),
+      linear-gradient(rgba(76,154,255,.05) 1px,transparent 1px);
+    background-size:22px 22px,22px 22px;}
+  .expr{min-height:30px;font-size:22px;line-height:1.35;text-align:right;color:#e8edf2;
+    font-family:ui-monospace,"SF Mono","JetBrains Mono",monospace;word-break:break-all;
+    white-space:pre-wrap;letter-spacing:.5px;}
+  .expr .ph{color:#3d4753;}
+  .caret{color:#4c9aff;animation:blink 1.1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .prev{min-height:22px;margin-top:6px;font-size:16px;text-align:right;color:#5f6c7b;
+    font-family:ui-monospace,monospace;letter-spacing:.5px;}
+  .prev.err{color:#c96a5f;}
+  .grid-sci{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:9px;}
+  .grid-basic{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+  button.key{border:none;border-radius:12px;cursor:pointer;touch-action:manipulation;
+    font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .04s,background .15s,filter .15s;
+    -webkit-user-select:none;user-select:none;}
+  button.key:active{transform:translateY(1px) scale(.985);}
+  .k-sci{height:42px;font-size:14px;font-weight:600;background:#1c222b;color:#9db0c2;
+    border:1px solid #262e39;font-family:ui-monospace,"SF Mono",monospace;}
+  .k-sci.mode{color:#4c9aff;border-color:#274866;}
+  .k-num{height:58px;font-size:24px;font-weight:500;background:#1f2630;color:#eef3f8;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+  .k-util{height:58px;font-size:19px;font-weight:600;background:#232a34;color:#9fb0c0;}
+  .k-op{height:58px;font-size:26px;font-weight:600;background:#1b2530;color:#4c9aff;
+    border:1px solid #24384f;}
+  .k-eq{height:58px;font-size:28px;font-weight:700;color:#fff;
+    background:linear-gradient(180deg,#4c9aff,#3a7fe0);
+    box-shadow:0 6px 16px -6px rgba(76,154,255,.6);}
+  .credit{margin:14px 4px 2px;text-align:center;font-size:10.5px;letter-spacing:.22em;
+    color:#4a5563;font-weight:600;font-family:ui-monospace,"SF Mono",monospace;text-transform:uppercase;}
+  .credit b{color:#4c9aff;font-weight:600;}
+  @media (hover:hover){
+    .k-sci:hover{background:#222a34;color:#c6d3df;}
+    .k-num:hover{background:#262f3a;}
+    .k-util:hover{background:#2b333e;color:#d3dde6;}
+    .k-op:hover{background:#20303f;}
+    .k-eq:hover{filter:brightness(1.06);}
+  }
+</style>
+</head>
+<body>
+  <div class="calc">
+    <div class="top">
+      <span class="brand">CALC<b>·</b>fx</span>
+      <span class="pill deg" id="mode">DEG</span>
+    </div>
+    <div class="screen">
+      <div class="expr" id="expr"><span class="ph">0</span><span class="caret">│</span></div>
+      <div class="prev" id="prev"></div>
+    </div>
+    <div class="grid-sci" id="sci">
+      <button class="key k-sci" data-val="sin(" data-kind="func">sin</button>
+      <button class="key k-sci" data-val="cos(" data-kind="func">cos</button>
+      <button class="key k-sci" data-val="tan(" data-kind="func">tan</button>
+      <button class="key k-sci" data-val="log(" data-kind="func">ln</button>
+      <button class="key k-sci" data-val="log10(" data-kind="func">log</button>
+      <button class="key k-sci" data-val="sqrt(" data-kind="func">√</button>
+      <button class="key k-sci" data-val="^2" data-kind="op">x²</button>
+      <button class="key k-sci" data-val="^" data-kind="op">xʸ</button>
+      <button class="key k-sci" data-val="(" data-kind="open">(</button>
+      <button class="key k-sci" data-val=")" data-kind="close">)</button>
+      <button class="key k-sci" data-val="pi" data-kind="const">π</button>
+      <button class="key k-sci" data-val="e" data-kind="const">e</button>
+      <button class="key k-sci" data-val="!" data-kind="op">n!</button>
+      <button class="key k-sci" data-val="1/(" data-kind="open">1/x</button>
+      <button class="key k-sci mode" data-val="__mode__" data-kind="mode">ANG</button>
+    </div>
+    <div class="grid-basic" id="basic">
+      <button class="key k-util" data-val="__clear__" data-kind="util">AC</button>
+      <button class="key k-util" data-val="__back__" data-kind="util">⌫</button>
+      <button class="key k-util" data-val="/100" data-kind="util">%</button>
+      <button class="key k-op" data-val="/" data-kind="operator">÷</button>
+      <button class="key k-num" data-val="7" data-kind="num">7</button>
+      <button class="key k-num" data-val="8" data-kind="num">8</button>
+      <button class="key k-num" data-val="9" data-kind="num">9</button>
+      <button class="key k-op" data-val="*" data-kind="operator">×</button>
+      <button class="key k-num" data-val="4" data-kind="num">4</button>
+      <button class="key k-num" data-val="5" data-kind="num">5</button>
+      <button class="key k-num" data-val="6" data-kind="num">6</button>
+      <button class="key k-op" data-val="-" data-kind="operator">−</button>
+      <button class="key k-num" data-val="1" data-kind="num">1</button>
+      <button class="key k-num" data-val="2" data-kind="num">2</button>
+      <button class="key k-num" data-val="3" data-kind="num">3</button>
+      <button class="key k-op" data-val="+" data-kind="operator">+</button>
+      <button class="key k-util" data-val="__sign__" data-kind="util">±</button>
+      <button class="key k-num" data-val="0" data-kind="num">0</button>
+      <button class="key k-num" data-val="." data-kind="dot">.</button>
+      <button class="key k-eq" data-val="__eq__" data-kind="equals">=</button>
+    </div>
+    <div class="credit">by <b>Danilo Gomes</b></div>
+  </div>
+
+<script>
+"use strict";
+
+/* ---------- avaliador ---------- */
+function tokenize(s){
+  const t=[]; let i=0;
+  while(i<s.length){
+    const c=s[i];
+    if(c===' '){i++;continue;}
+    if(/[0-9.]/.test(c)){ let j=i; while(j<s.length && /[0-9.]/.test(s[j])) j++;
+      t.push({type:'num',value:parseFloat(s.slice(i,j))}); i=j; continue; }
+    if(/[a-zA-Z]/.test(c)){ let j=i; while(j<s.length && /[a-zA-Z0-9]/.test(s[j])) j++;
+      t.push({type:'id',value:s.slice(i,j)}); i=j; continue; }
+    if('+-*/^!()'.includes(c)){ t.push({type:'op',value:c}); i++; continue; }
+    throw new Error('char');
+  }
+  return t;
+}
+function factorial(n){
+  if(n<0 || !Number.isInteger(n)) throw new Error('fact');
+  if(n>170) return Infinity;
+  let r=1; for(let i=2;i<=n;i++) r*=i; return r;
+}
+function evaluate(expr, mode){
+  const toks=tokenize(expr); let pos=0;
+  const peek=()=>toks[pos], next=()=>toks[pos++];
+  const deg=mode==='DEG', D=Math.PI/180;
+  function pAdd(){ let v=pMul();
+    while(peek()&&peek().type==='op'&&(peek().value==='+'||peek().value==='-')){
+      const op=next().value,r=pMul(); v=op==='+'?v+r:v-r;} return v; }
+  function pMul(){ let v=pUnary();
+    while(true){ const p=peek(); if(!p)break;
+      if(p.type==='op'&&(p.value==='*'||p.value==='/')){ const op=next().value,r=pUnary(); v=op==='*'?v*r:v/r; }
+      else if(p.type==='num'||p.type==='id'||(p.type==='op'&&p.value==='(')){ v=v*pUnary(); }
+      else break; } return v; }
+  function pUnary(){ const p=peek();
+    if(p&&p.type==='op'&&(p.value==='-'||p.value==='+')){ next(); const v=pUnary(); return p.value==='-'?-v:v; }
+    return pPow(); }
+  function pPow(){ let b=pPost(); const p=peek();
+    if(p&&p.type==='op'&&p.value==='^'){ next(); return Math.pow(b,pUnary()); } return b; }
+  function pPost(){ let v=pPrim();
+    while(peek()&&peek().type==='op'&&peek().value==='!'){ next(); v=factorial(v); } return v; }
+  function pPrim(){ const p=peek(); if(!p) throw new Error('end');
+    if(p.type==='num'){ next(); return p.value; }
+    if(p.type==='op'&&p.value==='('){ next(); const v=pAdd();
+      if(!peek()||peek().value!==')') throw new Error(')'); next(); return v; }
+    if(p.type==='id'){ next(); const n=p.value.toLowerCase();
+      if(n==='pi') return Math.PI; if(n==='e') return Math.E;
+      if(!peek()||peek().value!=='(') throw new Error('('); next(); const a=pAdd();
+      if(!peek()||peek().value!==')') throw new Error(')'); next(); return fn(n,a); }
+    throw new Error('tok'); }
+  function fn(n,x){ switch(n){
+    case 'sin': return Math.sin(deg?x*D:x);
+    case 'cos': return Math.cos(deg?x*D:x);
+    case 'tan': return Math.tan(deg?x*D:x);
+    case 'log': case 'ln': return Math.log(x);
+    case 'log10': return Math.log10(x);
+    case 'sqrt': return Math.sqrt(x);
+    default: throw new Error('fn'); } }
+  const r=pAdd(); if(pos!==toks.length) throw new Error('trail'); return r;
+}
+function balance(e){ const o=(e.match(/\(/g)||[]).length,c=(e.match(/\)/g)||[]).length;
+  return e+')'.repeat(Math.max(0,o-c)); }
+function fmt(n){ if(!isFinite(n)) return null;
+  if(Number.isInteger(n)&&Math.abs(n)<1e15) return String(n);
+  return parseFloat(n.toPrecision(12)).toString(); }
+function compute(expr,mode){ if(!expr.trim()) return {ok:true,value:''};
+  try{ const v=evaluate(balance(expr),mode); const s=fmt(v);
+    if(s===null) return {ok:false}; return {ok:true,value:s}; }
+  catch(e){ return {ok:false}; } }
+
+/* ---------- inserção inteligente ---------- */
+function last(s){ return s.slice(-1); }
+function needsMul(e){ return /[0-9.)]/.test(last(e))||e.endsWith('pi'); }
+function insertToken(e,tok,kind){
+  if((kind==='func'||kind==='const'||kind==='open')&&needsMul(e)) return e+'*'+tok;
+  if(kind==='num'&&(last(e)===')'||e.endsWith('pi'))) return e+'*'+tok;
+  return e+tok;
+}
+function toggleSign(e){
+  const m=e.match(/(-?\d*\.?\d+)$/);
+  if(!m) return e.startsWith('-')?e.slice(1):'-'+e;
+  const n=m[1], start=e.length-n.length, before=e[start-1];
+  const flip=n.startsWith('-')?n.slice(1):'-'+n;
+  if(n.startsWith('-')||before===undefined||/[(*/^+]/.test(before)) return e.slice(0,start)+flip;
+  return e.slice(0,start)+'('+flip+')';
+}
+function prettify(s){
+  return s.replace(/log10\(/g,'\u0001').replace(/log\(/g,'ln(').replace(/\u0001/g,'log(')
+    .replace(/sqrt\(/g,'\u221a(').replace(/pi/g,'\u03c0')
+    .replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/-/g,'\u2212');
+}
+
+/* ---------- botões ---------- */
+const SCI=[
+  ['sin','sin(','func'],['cos','cos(','func'],['tan','tan(','func'],['ln','log(','func'],['log','log10(','func'],
+  ['\u221a','sqrt(','func'],['x\u00b2','^2','op'],['x\u02b8','^','op'],['(','(','open'],[')',')','close'],
+  ['\u03c0','pi','const'],['e','e','const'],['n!','!','op'],['1/x','1/(','open'],['ANG','__mode__','mode']
+];
+const BASIC=[
+  ['AC','__clear__','util'],['\u232b','__back__','util'],['%','/100','util'],['\u00f7','/','operator'],
+  ['7','7','num'],['8','8','num'],['9','9','num'],['\u00d7','*','operator'],
+  ['4','4','num'],['5','5','num'],['6','6','num'],['\u2212','-','operator'],
+  ['1','1','num'],['2','2','num'],['3','3','num'],['+','+','operator'],
+  ['\u00b1','__sign__','util'],['0','0','num'],['.','.','dot'],['=','__eq__','equals']
+];
+
+let expr='', mode='DEG', errTimer=null;
+const exprEl=document.getElementById('expr'),
+      prevEl=document.getElementById('prev'),
+      modeEl=document.getElementById('mode');
+
+function render(err){
+  const p=prettify(expr);
+  exprEl.innerHTML=(p?escapeHtml(p):'<span class="ph">0</span>')+'<span class="caret">\u2502</span>';
+  const r=compute(expr,mode);
+  if(err){ prevEl.textContent='Erro'; prevEl.classList.add('err'); }
+  else{ prevEl.classList.remove('err');
+    prevEl.textContent=(r.ok&&r.value!==''&&r.value!==expr)?('= '+prettify(r.value)):''; }
+}
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function act(value,kind){
+  if(value==='__mode__'){ mode=mode==='DEG'?'RAD':'DEG'; modeEl.textContent=mode;
+    modeEl.classList.toggle('deg',mode==='DEG'); render(); return; }
+  if(value==='__clear__'){ expr=''; render(); return; }
+  if(value==='__back__'){ expr=expr.slice(0,-1); render(); return; }
+  if(value==='__sign__'){ expr=toggleSign(expr); render(); return; }
+  if(value==='__eq__'){ const r=compute(expr,mode);
+    if(r.ok&&r.value!==''){ expr=r.value; render(); }
+    else{ render(true); clearTimeout(errTimer); errTimer=setTimeout(render,600); }
+    return; }
+  expr=insertToken(expr,value,kind); render();
+}
+
+function onKey(ev){
+  const b=ev.target.closest('button'); if(!b) return;
+  act(b.dataset.val, b.dataset.kind);
+}
+document.getElementById('sci').addEventListener('click',onKey);
+document.getElementById('basic').addEventListener('click',onKey);
+modeEl.addEventListener('click',()=>act('__mode__'));
+
+/* teclado físico (quando aberto no navegador) */
+const kmap={'+':['+','operator'],'-':['-','operator'],'*':['*','operator'],'/':['/','operator'],
+  '^':['^','op'],'(':['(','open'],')':[')','close'],'%':['/100','util'],'.':['.','dot']};
+for(let d=0;d<=9;d++) kmap[String(d)]=[String(d),'num'];
+window.addEventListener('keydown',(ev)=>{
+  if(ev.key==='Enter'||ev.key==='='){ ev.preventDefault(); act('__eq__'); return; }
+  if(ev.key==='Backspace'){ ev.preventDefault(); act('__back__'); return; }
+  if(ev.key==='Escape'){ ev.preventDefault(); act('__clear__'); return; }
+  const m=kmap[ev.key]; if(m){ ev.preventDefault(); act(m[0],m[1]); }
+});
+
+/* evita zoom por duplo toque no iOS */
+let lastTouch=0;
+document.addEventListener('touchend',(e)=>{
+  const now=Date.now(); if(now-lastTouch<=300){ e.preventDefault(); } lastTouch=now;
+},{passive:false});
+
+render();
+</script>
+</body>
+</html>
