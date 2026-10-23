@@ -55,7 +55,7 @@ body.night .photo{opacity:0}
   display:grid;grid-template-columns:minmax(200px,22vw) 1fr;gap:2vw;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   padding-block:3.2vh 3vh;}
-.rail{display:grid;grid-template-rows:1fr auto 1fr;min-width:0;padding-left:3vw;height:100%;box-sizing:border-box}
+.rail{display:grid;grid-template-rows:repeat(4,1fr);min-width:0;padding-left:3vw;height:100%;box-sizing:border-box}
 .box{display:flex;flex-direction:column;justify-content:center;gap:3vh;min-width:0}
 .loc{font-weight:600;font-size:clamp(14px,1.6vw,22px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.4em}
 .loc svg{width:.8em;height:.8em;flex:none}
@@ -76,7 +76,7 @@ body.night .photo{opacity:0}
 .cal{font-weight:600;font-size:clamp(11px,1.05vw,15px);font-variant-numeric:tabular-nums}
 .cal .m{letter-spacing:.06em;margin-bottom:.6em}
 .cal table{border-collapse:collapse}
-.cal th,.cal td{width:2.2em;height:2em;text-align:center;padding:0}
+.cal th,.cal td{width:2.2em;height:1.8em;text-align:center;padding:0}
 .cal th{font-weight:600;color:var(--ink)}
 .cal td.we{color:var(--ink-soft)}
 .cal td.today span{display:inline-grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:var(--ink);color:var(--violet)}
@@ -102,16 +102,16 @@ body.night .photo{opacity:0}
 .tag.on .dot{background:#7dffb0}
 .status{font-size:12px;color:var(--ink-faint);font-weight:500}
 
-.radio{align-self:flex-start;width:max-content;max-width:calc(100vw - 32px);box-sizing:border-box;
-  display:flex;align-items:center;gap:6px;padding:6px 14px 6px 6px;border-radius:999px;
+.radio{align-self:stretch;width:auto;max-width:100%;box-sizing:border-box;
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;border-radius:20px;
   background:rgba(20,12,70,.35);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink)}
-.radio button{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:inherit;font:600 26px/1 var(--font-ui);cursor:pointer;display:grid;place-items:center;padding:0}
+.radio button{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:inherit;font:600 26px/1 var(--font-ui);cursor:pointer;display:grid;place-items:center;padding:0}
 .radio #rPlay{background:var(--ink);color:#221860}
 .radio #rPlay svg{width:20px;height:20px}
 .radio button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.rinfo{display:flex;flex-direction:column;min-width:9.5em;max-width:16em;margin-left:4px}
+.rinfo{display:flex;flex-direction:column;min-width:0;order:-1;flex-basis:100%;padding:0 4px}
 .rname{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rstate{font-weight:500;font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.rstate{font-weight:500;font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 body.night .radio{background:rgba(0,0,0,.5);border-color:rgba(255,90,79,.25)}
 body.night .radio #rPlay{background:#ff5a4f;color:#000}
 @media (max-aspect-ratio:1/1){
@@ -142,8 +142,10 @@ body.night{background:#000}
 <main class="screen">
   <section class="rail" aria-label="Tempo e calendário">
     <div class="box"><div class="fc" id="fc" aria-label="Previsão"></div></div>
-    <div class="box box-mid">
+    <div class="box">
     <div class="date-big"><div class="dow" id="dow">Fri <span>Oct</span></div><div class="num" id="dnum">23</div></div>
+    </div>
+    <div class="box">
     <div class="cal" id="cal"></div>
     </div>
     <div class="box">
