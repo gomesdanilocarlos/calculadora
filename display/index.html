@@ -153,7 +153,7 @@ body.night{background:#000}
     const dow=DOW[new Date(Date.UTC(n.y,n.m,n.d)).getUTCDay()];
     $("topDate").textContent=dow+" "+n.d+" "+MON[n.m];
     // dim between 23:00 and 07:00
-    const night=(n.h>=23||n.h<7);
+    const night=(n.h>=23||n.h<6||(n.h===6&&n.mi<30));
     document.body.classList.toggle("night",night);
     $("dim").style.opacity=night?".35":"0";
     const key=n.y+"-"+n.m+"-"+n.d;
