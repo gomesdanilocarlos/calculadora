@@ -31,7 +31,7 @@ body{
   background:var(--night);
   -webkit-user-select:none;user-select:none;cursor:default;
 }
-.wall{position:fixed;inset:0;overflow:hidden;z-index:0;
+.wall{transition:opacity 2s;position:fixed;inset:0;overflow:hidden;z-index:0;
   background:
     radial-gradient(120% 90% at 10% 0%, #3a2a8f 0%, transparent 55%),
     radial-gradient(90% 80% at 100% 100%, #2a5cff 0%, transparent 60%),
@@ -97,7 +97,13 @@ body{
   .tag{position:static;margin-top:2vh}
   .rail{padding-left:0}
 }
-@media (prefers-reduced-motion:reduce){.dim{transition:none}}
+body.night{--ink:#ff5a4f;--ink-soft:rgba(255,90,79,.75);--ink-faint:rgba(255,90,79,.5);--clock:rgba(255,70,60,.9)}
+body.night .wall,body.night .grain{opacity:0}
+body.night .clock{text-shadow:none}
+body.night .cal td.today span{background:#ff5a4f;color:#000}
+body{transition:background 2s}
+body.night{background:#000}
+@media (prefers-reduced-motion:reduce){.dim{transition:none}body{transition:none}}
 </style>
 </head>
 <body>
@@ -147,7 +153,9 @@ body{
     const dow=DOW[new Date(Date.UTC(n.y,n.m,n.d)).getUTCDay()];
     $("topDate").textContent=dow+" "+n.d+" "+MON[n.m];
     // dim between 23:00 and 07:00
-    $("dim").style.opacity=(n.h>=23||n.h<7)?".55":"0";
+    const night=(n.h>=23||n.h<7);
+    document.body.classList.toggle("night",night);
+    $("dim").style.opacity=night?".35":"0";
     const key=n.y+"-"+n.m+"-"+n.d;
     if(key!==lastDay){lastDay=key;
       $("dow").innerHTML=dow+" <span>"+MON[n.m]+"</span>";
