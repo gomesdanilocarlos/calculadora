@@ -78,7 +78,7 @@ body{
 .now{display:flex;align-items:center;gap:1.2vw;margin-top:1.5vh;min-width:0;max-width:100%}
 .now .now-temp{font-size:clamp(60px,8vw,118px);margin:0}
 .now-side{display:flex;flex-direction:column;gap:.5vh;min-width:0}
-.greet{font-weight:600;font-size:clamp(22px,3vw,42px);margin-top:1.5vh;letter-spacing:-.01em;color:var(--ink)}
+.greet{font-weight:700;font-size:clamp(30px,4vw,58px);line-height:1;letter-spacing:-.02em;color:var(--ink);text-wrap:balance}
 .top-date{font-weight:600;font-size:clamp(16px,1.9vw,26px);margin-top:1.2vh;color:var(--ink)}
 .clock{font-family:var(--font-clock);font-weight:200;color:var(--clock);
   font-size:min(36vh,24vw);line-height:.86;letter-spacing:-.01em;margin-top:1vh;
@@ -119,6 +119,7 @@ body.night{background:#000}
 
 <main class="screen">
   <section class="rail" aria-label="Tempo e calendário">
+    <div class="greet" id="greet">Boa noite</div>
     <div class="fc" id="fc" aria-label="Previsão"></div>
     <div class="date-big"><div class="dow" id="dow">Fri <span>Oct</span></div><div class="num" id="dnum">23</div></div>
     <div class="cal" id="cal"></div>
@@ -135,7 +136,6 @@ body.night{background:#000}
         <div class="cond" id="cond"><span>A carregar o tempo…</span></div>
       </div>
     </div>
-    <div class="greet" id="greet">Boa noite</div>
     <button class="tag" id="wake" type="button"><span class="dot"></span><span id="wakeTxt">Display by Danilo Gomes</span></button>
   </section>
 </main>
