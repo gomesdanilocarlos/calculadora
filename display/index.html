@@ -75,8 +75,8 @@ body{
 .cal td.today span{display:inline-grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:var(--ink);color:var(--violet)}
 
 .stage{display:flex;flex-direction:column;align-items:center;min-width:0;position:relative}
-.greet{font-weight:600;font-size:clamp(20px,2.6vw,36px);margin-top:1vh;letter-spacing:-.01em;color:var(--ink)}
-.top-date{font-weight:600;font-size:clamp(14px,1.6vw,22px);margin-top:.3vh;color:var(--ink-soft)}
+.greet{font-weight:600;font-size:clamp(22px,3vw,42px);margin-top:2vh;letter-spacing:-.01em;color:var(--ink)}
+.top-date{font-weight:600;font-size:clamp(16px,1.9vw,26px);margin-top:1.2vh;color:var(--ink)}
 .clock{font-family:var(--font-clock);font-weight:200;color:var(--clock);
   font-size:min(44vh,26vw);line-height:.86;letter-spacing:-.01em;margin-top:1vh;
   font-variant-numeric:tabular-nums;
@@ -128,9 +128,9 @@ body.night{background:#000}
   </section>
 
   <section class="stage">
-    <div class="greet" id="greet">Boa noite</div>
     <div class="top-date" id="topDate">Fri 23 Oct</div>
     <div class="clock" id="clock" aria-live="off">20<span class="colon">:</span>08</div>
+    <div class="greet" id="greet">Boa noite</div>
     <button class="tag" id="wake" type="button"><span class="dot"></span><span id="wakeTxt">Display by Danilo Gomes</span></button>
   </section>
 </main>
