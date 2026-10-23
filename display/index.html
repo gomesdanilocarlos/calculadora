@@ -43,6 +43,10 @@ body{
 .wall::after{width:120vmax;height:120vmax;left:-70vmax;top:20%;
   border:2px solid rgba(190,180,255,.25);
   background:radial-gradient(circle at 70% 20%, rgba(150,120,255,.25), transparent 60%);}
+.photo{position:fixed;inset:0;z-index:1;pointer-events:none;background:url("bg.jpg") center/cover no-repeat;
+  opacity:.38;mix-blend-mode:luminosity;transition:opacity 2s;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 35%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 35%,#000 100%)}
+body.night .photo{opacity:0}
 .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");}
 .dim{position:fixed;inset:0;z-index:5;background:#000;opacity:0;pointer-events:none;transition:opacity 2s}
@@ -130,6 +134,7 @@ body.night{background:#000}
 
 
 <div class="wall" aria-hidden="true"></div>
+<div class="photo" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="dim" id="dim" aria-hidden="true"></div>
 
