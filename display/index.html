@@ -75,7 +75,7 @@ body{
 .cal td.today span{display:inline-grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:var(--ink);color:var(--violet)}
 
 .stage{display:flex;flex-direction:column;align-items:center;min-width:0;position:relative}
-.now{display:flex;align-items:center;gap:1.2vw;margin-top:5vh;min-width:0;max-width:100%}
+.now{display:flex;align-items:center;gap:1.2vw;margin-block:auto;padding-top:3vh;min-width:0;max-width:100%}
 .now .now-temp{font-size:clamp(60px,8vw,118px);margin:0}
 .now-side{display:flex;flex-direction:column;gap:.5vh;min-width:0}
 .greet-sub{display:block;font-weight:500;font-size:.62em;letter-spacing:0;color:var(--ink-soft);margin-top:.35em}
@@ -87,7 +87,7 @@ body{
   text-shadow:0 1px 0 rgba(255,255,255,.35),0 18px 60px rgba(20,10,80,.35);
   display:flex;align-items:baseline}
 .clock .colon{display:inline-block;transform:translateY(-.06em);margin:0 -.02em}
-.tag{margin-top:auto;display:flex;align-items:center;gap:.45em;font-weight:600;font-size:clamp(13px,1.3vw,17px);color:var(--ink);
+.tag{margin-top:0;display:flex;align-items:center;gap:.45em;font-weight:600;font-size:clamp(13px,1.3vw,17px);color:var(--ink);
   background:none;border:0;font-family:inherit;cursor:pointer;padding:.4em .8em;border-radius:999px}
 .tag:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .tag .dot{width:.55em;height:.55em;border-radius:50%;background:var(--ink-faint)}
