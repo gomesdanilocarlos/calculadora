@@ -75,15 +75,18 @@ body{
 .cal td.today span{display:inline-grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:var(--ink);color:var(--violet)}
 
 .stage{display:flex;flex-direction:column;align-items:center;min-width:0;position:relative}
-.greet{font-weight:600;font-size:clamp(22px,3vw,42px);margin-top:2vh;letter-spacing:-.01em;color:var(--ink)}
+.now{display:flex;align-items:center;gap:1.2vw;margin-top:1.5vh;min-width:0;max-width:100%}
+.now .now-temp{font-size:clamp(60px,8vw,118px);margin:0}
+.now-side{display:flex;flex-direction:column;gap:.5vh;min-width:0}
+.greet{font-weight:600;font-size:clamp(22px,3vw,42px);margin-top:1.5vh;letter-spacing:-.01em;color:var(--ink)}
 .top-date{font-weight:600;font-size:clamp(16px,1.9vw,26px);margin-top:1.2vh;color:var(--ink)}
 .clock{font-family:var(--font-clock);font-weight:200;color:var(--clock);
-  font-size:min(44vh,26vw);line-height:.86;letter-spacing:-.01em;margin-top:1vh;
+  font-size:min(36vh,24vw);line-height:.86;letter-spacing:-.01em;margin-top:1vh;
   font-variant-numeric:tabular-nums;
   text-shadow:0 1px 0 rgba(255,255,255,.35),0 18px 60px rgba(20,10,80,.35);
   display:flex;align-items:baseline}
 .clock .colon{display:inline-block;transform:translateY(-.06em);margin:0 -.02em}
-.tag{position:absolute;bottom:4vh;display:flex;align-items:center;gap:.45em;font-weight:600;font-size:clamp(13px,1.3vw,17px);color:var(--ink);
+.tag{margin-top:auto;display:flex;align-items:center;gap:.45em;font-weight:600;font-size:clamp(13px,1.3vw,17px);color:var(--ink);
   background:none;border:0;font-family:inherit;cursor:pointer;padding:.4em .8em;border-radius:999px}
 .tag:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .tag .dot{width:.55em;height:.55em;border-radius:50%;background:var(--ink-faint)}
@@ -116,12 +119,6 @@ body.night{background:#000}
 
 <main class="screen">
   <section class="rail" aria-label="Tempo e calendário">
-    <div>
-      <div class="loc"><span id="loc">Hammersmith and Fulham</span>
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 3 3 10.5l7.5 2.9L13.4 21z"/></svg></div>
-      <div class="now-temp" id="nowTemp">--°</div>
-    </div>
-    <div class="cond" id="cond"><span>A carregar o tempo…</span></div>
     <div class="fc" id="fc" aria-label="Previsão"></div>
     <div class="date-big"><div class="dow" id="dow">Fri <span>Oct</span></div><div class="num" id="dnum">23</div></div>
     <div class="cal" id="cal"></div>
@@ -130,6 +127,14 @@ body.night{background:#000}
   <section class="stage">
     <div class="top-date" id="topDate">Fri 23 Oct</div>
     <div class="clock" id="clock" aria-live="off">20<span class="colon">:</span>08</div>
+    <div class="now">
+      <div class="now-temp" id="nowTemp">--°</div>
+      <div class="now-side">
+        <div class="loc"><span id="loc">Hammersmith and Fulham</span>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 3 3 10.5l7.5 2.9L13.4 21z"/></svg></div>
+        <div class="cond" id="cond"><span>A carregar o tempo…</span></div>
+      </div>
+    </div>
     <div class="greet" id="greet">Boa noite</div>
     <button class="tag" id="wake" type="button"><span class="dot"></span><span id="wakeTxt">Display by Danilo Gomes</span></button>
   </section>
