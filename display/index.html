@@ -55,7 +55,8 @@ body.night .photo{opacity:0}
   display:grid;grid-template-columns:minmax(200px,22vw) 1fr;gap:2vw;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   padding-block:3.2vh 3vh;}
-.rail{display:flex;flex-direction:column;gap:3.4vh;min-width:0;padding-left:3vw;padding-top:4vh}
+.rail{display:grid;grid-template-rows:1fr auto 1fr;min-width:0;padding-left:3vw;height:100%;box-sizing:border-box}
+.box{display:flex;flex-direction:column;justify-content:center;gap:3vh;min-width:0}
 .loc{font-weight:600;font-size:clamp(14px,1.6vw,22px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.4em}
 .loc svg{width:.8em;height:.8em;flex:none}
 .now-temp{font-weight:600;font-size:clamp(48px,6.4vw,92px);line-height:.95;letter-spacing:-.02em;margin-top:.15em}
@@ -101,7 +102,7 @@ body.night .photo{opacity:0}
 .tag.on .dot{background:#7dffb0}
 .status{font-size:12px;color:var(--ink-faint);font-weight:500}
 
-.radio{align-self:flex-start;margin-top:auto;width:max-content;max-width:calc(100vw - 32px);box-sizing:border-box;
+.radio{align-self:flex-start;width:max-content;max-width:calc(100vw - 32px);box-sizing:border-box;
   display:flex;align-items:center;gap:6px;padding:6px 14px 6px 6px;border-radius:999px;
   background:rgba(20,12,70,.35);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink)}
 .radio button{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:inherit;font:600 26px/1 var(--font-ui);cursor:pointer;display:grid;place-items:center;padding:0}
@@ -140,9 +141,12 @@ body.night{background:#000}
 
 <main class="screen">
   <section class="rail" aria-label="Tempo e calendário">
-    <div class="fc" id="fc" aria-label="Previsão"></div>
+    <div class="box"><div class="fc" id="fc" aria-label="Previsão"></div></div>
+    <div class="box box-mid">
     <div class="date-big"><div class="dow" id="dow">Fri <span>Oct</span></div><div class="num" id="dnum">23</div></div>
     <div class="cal" id="cal"></div>
+    </div>
+    <div class="box">
     <div class="radio" id="radio" aria-label="Rádio">
     <button type="button" id="rPrev" aria-label="Estação anterior">‹</button>
     <button type="button" id="rPlay" aria-label="Tocar rádio"><svg id="rIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
@@ -150,6 +154,7 @@ body.night{background:#000}
     <div class="rinfo"><span class="rname" id="rName">BBC Radio 1</span><span class="rstate" id="rState">Toque ▶ para ouvir</span></div>
     <audio id="rAudio" preload="none" playsinline></audio>
   </div>
+    </div>
   </section>
 
   <section class="stage">
