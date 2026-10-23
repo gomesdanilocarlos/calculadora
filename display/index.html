@@ -75,7 +75,8 @@ body{
 .cal td.today span{display:inline-grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:var(--ink);color:var(--violet)}
 
 .stage{display:flex;flex-direction:column;align-items:center;min-width:0;position:relative}
-.top-date{font-weight:600;font-size:clamp(16px,1.9vw,26px);margin-top:1.2vh;color:var(--ink)}
+.greet{font-weight:600;font-size:clamp(20px,2.6vw,36px);margin-top:1vh;letter-spacing:-.01em;color:var(--ink)}
+.top-date{font-weight:600;font-size:clamp(14px,1.6vw,22px);margin-top:.3vh;color:var(--ink-soft)}
 .clock{font-family:var(--font-clock);font-weight:200;color:var(--clock);
   font-size:min(44vh,26vw);line-height:.86;letter-spacing:-.01em;margin-top:1vh;
   font-variant-numeric:tabular-nums;
@@ -127,6 +128,7 @@ body.night{background:#000}
   </section>
 
   <section class="stage">
+    <div class="greet" id="greet">Boa noite</div>
     <div class="top-date" id="topDate">Fri 23 Oct</div>
     <div class="clock" id="clock" aria-live="off">20<span class="colon">:</span>08</div>
     <button class="tag" id="wake" type="button"><span class="dot"></span><span id="wakeTxt">Display by Danilo Gomes</span></button>
@@ -153,6 +155,7 @@ body.night{background:#000}
     const dow=DOW[new Date(Date.UTC(n.y,n.m,n.d)).getUTCDay()];
     $("topDate").textContent=dow+" "+n.d+" "+MON[n.m];
     // dim between 23:00 and 07:00
+    $("greet").textContent=(n.h>=5&&n.h<12)?"Bom dia":(n.h>=12&&n.h<18)?"Boa tarde":"Boa noite";
     const night=(n.h>=23||n.h<6||(n.h===6&&n.mi<30));
     document.body.classList.toggle("night",night);
     $("dim").style.opacity=night?".35":"0";
