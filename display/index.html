@@ -97,6 +97,18 @@ body{
 .tag.on .dot{background:#7dffb0}
 .status{font-size:12px;color:var(--ink-faint);font-weight:500}
 
+.radio{align-self:flex-start;width:max-content;max-width:calc(100vw - 32px);box-sizing:border-box;
+  display:flex;align-items:center;gap:6px;padding:6px 14px 6px 6px;border-radius:999px;
+  background:rgba(20,12,70,.35);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink)}
+.radio button{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:inherit;font:600 26px/1 var(--font-ui);cursor:pointer;display:grid;place-items:center;padding:0}
+.radio #rPlay{background:var(--ink);color:#221860}
+.radio #rPlay svg{width:20px;height:20px}
+.radio button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.rinfo{display:flex;flex-direction:column;min-width:9.5em;max-width:16em;margin-left:4px}
+.rname{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rstate{font-weight:500;font-size:12px;color:var(--ink-soft);white-space:nowrap}
+body.night .radio{background:rgba(0,0,0,.5);border-color:rgba(255,90,79,.25)}
+body.night .radio #rPlay{background:#ff5a4f;color:#000}
 @media (max-aspect-ratio:1/1){
   body{overflow:auto}
   .screen{grid-template-columns:1fr;grid-template-rows:auto auto;height:auto;min-height:100%}
@@ -126,6 +138,13 @@ body.night{background:#000}
     <div class="fc" id="fc" aria-label="Previsão"></div>
     <div class="date-big"><div class="dow" id="dow">Fri <span>Oct</span></div><div class="num" id="dnum">23</div></div>
     <div class="cal" id="cal"></div>
+    <div class="radio" id="radio" aria-label="Rádio">
+    <button type="button" id="rPrev" aria-label="Estação anterior">‹</button>
+    <button type="button" id="rPlay" aria-label="Tocar rádio"><svg id="rIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <button type="button" id="rNext" aria-label="Próxima estação">›</button>
+    <div class="rinfo"><span class="rname" id="rName">BBC Radio 1</span><span class="rstate" id="rState">Toque ▶ para ouvir</span></div>
+    <audio id="rAudio" preload="none" playsinline></audio>
+  </div>
   </section>
 
   <section class="stage">
@@ -274,6 +293,66 @@ body.night{background:#000}
   }
   $("wake").addEventListener("click",wake);
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")wake()});
+
+
+  // Radio (stream addresses looked up on radio-browser.info)
+  const STATIONS=[
+    {n:"BBC Radio 1",q:"BBC Radio 1",c:"GB"},
+    {n:"BBC Radio 2",q:"BBC Radio 2",c:"GB"},
+    {n:"BBC Radio London",q:"BBC Radio London",c:"GB"},
+    {n:"Capital FM",q:"Capital FM",c:"GB"},
+    {n:"Heart London",q:"Heart London",c:"GB"},
+    {n:"Smooth London",q:"Smooth London",c:"GB"},
+    {n:"Magic Radio",q:"Magic",c:"GB"},
+    {n:"Jovem Pan FM",q:"Jovem Pan",c:"BR"},
+    {n:"Positiva FM Goiânia",q:"Positiva",c:"BR",st:"Goiás"},
+    {n:"Terra FM Goiânia",q:"Terra FM",c:"BR",st:"Goiás"},
+    {n:"Band Goiânia",q:"Bandeirantes",c:"BR",st:"Goiás"}
+  ];
+  const API=["https://de1.api.radio-browser.info","https://fi1.api.radio-browser.info","https://at1.api.radio-browser.info"];
+  const au=$("rAudio");
+  let si=0,playing=false;
+  try{si=Math.min(+localStorage.getItem("radioIdx")||0,STATIONS.length-1)}catch(e){}
+  const PLAY='<path d="M8 5v14l11-7z"/>',PAUSE='<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>';
+  function showStation(){$("rName").textContent=STATIONS[si].n}
+  async function resolve(st){
+    try{const c=localStorage.getItem("radio:"+st.n);if(c)return c}catch(e){}
+    for(const base of API){
+      try{
+        const u=base+"/json/stations/search?name="+encodeURIComponent(st.q)+"&countrycode="+st.c+(st.st?"&state="+encodeURIComponent(st.st):"")+"&hidebroken=true&order=clickcount&reverse=true&limit=5";
+        const r=await fetch(u);if(!r.ok)continue;
+        const list=await r.json();
+        const pick=list.find(x=>x.url_resolved&&x.url_resolved.startsWith("https"))||list.find(x=>x.url_resolved);
+        if(pick){try{localStorage.setItem("radio:"+st.n,pick.url_resolved)}catch(e){};return pick.url_resolved}
+        return null;
+      }catch(e){}
+    }
+    return null;
+  }
+  async function play(){
+    const st=STATIONS[si];
+    $("rState").textContent="A sintonizar…";
+    const url=await resolve(st);
+    if(!url){$("rState").textContent="Estação indisponível";return}
+    if(au.src!==url)au.src=url;
+    try{await au.play();playing=true;$("rIcon").innerHTML=PAUSE;$("rState").textContent="Ao vivo"}
+    catch(e){
+      try{localStorage.removeItem("radio:"+st.n)}catch(x){}
+      playing=false;$("rIcon").innerHTML=PLAY;$("rState").textContent="Não tocou, tenta outra";
+    }
+  }
+  function pause(){au.pause();playing=false;$("rIcon").innerHTML=PLAY;$("rState").textContent="Pausado"}
+  function go(d){
+    si=(si+d+STATIONS.length)%STATIONS.length;
+    try{localStorage.setItem("radioIdx",si)}catch(e){}
+    showStation();
+    if(playing){au.pause();play()}else $("rState").textContent="Toque ▶ para ouvir";
+  }
+  $("rPlay").addEventListener("click",()=>playing?pause():play());
+  $("rPrev").addEventListener("click",()=>go(-1));
+  $("rNext").addEventListener("click",()=>go(1));
+  au.addEventListener("error",()=>{if(playing){try{localStorage.removeItem("radio:"+STATIONS[si].n)}catch(e){};playing=false;$("rIcon").innerHTML=PLAY;$("rState").textContent="Sem sinal, tenta outra"}});
+  showStation();
 
   tick(); setInterval(tick,1000);
   pollMsg(); listenMsg(); setInterval(pollMsg,5*60*1000);
