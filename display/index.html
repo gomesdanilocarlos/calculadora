@@ -57,11 +57,13 @@ body{
 .now-temp{font-weight:600;font-size:clamp(48px,6.4vw,92px);line-height:.95;letter-spacing:-.02em;margin-top:.15em}
 .cond{display:flex;align-items:center;gap:.5em;font-weight:600;font-size:clamp(13px,1.35vw,19px);color:var(--ink)}
 .cond svg{width:1.4em;height:1.4em;flex:none}
-.fc{display:grid;grid-template-columns:auto 1.8em 1fr auto;column-gap:.7em;row-gap:.55em;align-items:center;
-  font-weight:600;font-size:clamp(13px,1.35vw,19px);font-variant-numeric:tabular-nums}
-.fc svg{width:1.4em;height:1.4em}
-.fc .lo{text-align:right;color:var(--ink-soft)}
-.fc .hi{text-align:right}
+.fc{display:flex;flex-direction:column;gap:.55em;font-weight:600;font-size:clamp(13px,1.35vw,19px);font-variant-numeric:tabular-nums;max-width:15em}
+.fr{display:flex;align-items:center;gap:.7em}
+.fr .dn{width:2.6em}
+.fr .ic{display:inline-flex;width:1.4em;height:1.4em}
+.fr .ic svg{width:100%;height:100%}
+.fr .lo{margin-left:auto;color:var(--ink-soft);text-align:right;min-width:1.6em}
+.fr .hi{text-align:right;min-width:2.2em}
 .date-big{display:flex;flex-direction:column;align-items:flex-start;gap:.1em;margin-top:1vh}
 .date-big .dow{font-weight:600;font-size:clamp(22px,2.6vw,38px)}
 .date-big .dow span{color:var(--ink-soft)}
@@ -253,7 +255,7 @@ body.night{background:#000}
       for(let i=1;i<d.time.length;i++){
         const [y,m,dd]=d.time[i].split("-").map(Number);
         const name=DOW[new Date(Date.UTC(y,m-1,dd)).getUTCDay()];
-        h+="<span>"+name+"</span>"+I[kind(d.weather_code[i])[0]]+'<span class="lo">'+Math.round(d.temperature_2m_min[i])+'</span><span class="hi">'+Math.round(d.temperature_2m_max[i])+"°</span>";
+        h+='<div class="fr"><span class="dn">'+name+'</span><span class="ic">'+I[kind(d.weather_code[i])[0]]+'</span><span class="lo">'+Math.round(d.temperature_2m_min[i])+'</span><span class="hi">'+Math.round(d.temperature_2m_max[i])+"°</span></div>";
       }
       $("fc").innerHTML=h;
     }catch(e){
