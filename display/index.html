@@ -317,7 +317,9 @@ body.night{background:#000}
     {n:"Smooth London",q:"Smooth London",c:"GB"},
     {n:"Magic Radio",q:"Magic",c:"GB"},
     {n:"Antena 1 São Paulo",q:"Antena 1",c:"BR",st:"São Paulo"},
-    {n:"Terra FM Goiânia",q:"Terra FM",c:"BR",st:"Goiás"}
+    {n:"Alpha FM Goiânia",q:"Alpha FM",c:"BR",m:/goi/i},
+    {n:"Máxima FM Goiânia",q:"Maxima",c:"BR",m:/goi/i},
+    {n:"96 FM Anápolis",u:"https://cast4.hoost.com.br:20079/stream"}
   ];
   const API=["https://de1.api.radio-browser.info","https://fi1.api.radio-browser.info","https://at1.api.radio-browser.info"];
   const au=$("rAudio");
@@ -326,14 +328,16 @@ body.night{background:#000}
   const PLAY='<path d="M8 5v14l11-7z"/>',PAUSE='<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>';
   function showStation(){$("rName").textContent=STATIONS[si].n}
   async function resolve(st){
-    try{const c=localStorage.getItem("radio:"+st.n);if(c)return c}catch(e){}
+    if(st.u)return st.u;
+    try{const c=localStorage.getItem("radio2:"+st.n);if(c)return c}catch(e){}
     for(const base of API){
       try{
-        const u=base+"/json/stations/search?name="+encodeURIComponent(st.q)+"&countrycode="+st.c+(st.st?"&state="+encodeURIComponent(st.st):"")+"&hidebroken=true&order=clickcount&reverse=true&limit=5";
+        const u=base+"/json/stations/search?name="+encodeURIComponent(st.q)+"&countrycode="+st.c+(st.st?"&state="+encodeURIComponent(st.st):"")+"&hidebroken=true&order=clickcount&reverse=true&limit=60";
         const r=await fetch(u);if(!r.ok)continue;
-        const list=await r.json();
+        let list=await r.json();
+        if(st.m)list=list.filter(x=>st.m.test((x.name||"")+" "+(x.state||"")+" "+(x.homepage||"")));
         const pick=list.find(x=>x.url_resolved&&x.url_resolved.startsWith("https"))||list.find(x=>x.url_resolved);
-        if(pick){try{localStorage.setItem("radio:"+st.n,pick.url_resolved)}catch(e){};return pick.url_resolved}
+        if(pick){try{localStorage.setItem("radio2:"+st.n,pick.url_resolved)}catch(e){};return pick.url_resolved}
         return null;
       }catch(e){}
     }
@@ -347,7 +351,7 @@ body.night{background:#000}
     if(au.src!==url)au.src=url;
     try{await au.play();playing=true;$("rIcon").innerHTML=PAUSE;$("rState").textContent="Ao vivo"}
     catch(e){
-      try{localStorage.removeItem("radio:"+st.n)}catch(x){}
+      try{localStorage.removeItem("radio2:"+st.n)}catch(x){}
       playing=false;$("rIcon").innerHTML=PLAY;$("rState").textContent="Não tocou, tenta outra";
     }
   }
@@ -361,7 +365,7 @@ body.night{background:#000}
   $("rPlay").addEventListener("click",()=>playing?pause():play());
   $("rPrev").addEventListener("click",()=>go(-1));
   $("rNext").addEventListener("click",()=>go(1));
-  au.addEventListener("error",()=>{if(playing){try{localStorage.removeItem("radio:"+STATIONS[si].n)}catch(e){};playing=false;$("rIcon").innerHTML=PLAY;$("rState").textContent="Sem sinal, tenta outra"}});
+  au.addEventListener("error",()=>{if(playing){try{localStorage.removeItem("radio2:"+STATIONS[si].n)}catch(e){};playing=false;$("rIcon").innerHTML=PLAY;$("rState").textContent="Sem sinal, tenta outra"}});
   showStation();
 
   tick(); setInterval(tick,1000);
